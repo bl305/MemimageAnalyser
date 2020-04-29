@@ -2,7 +2,7 @@ MemimageAnalyser for Volatility2
 
 A tool to automate some of the initial triage of forensics memory image evidences.
 
-It is written in Python and requires Volatility 2.6.1+.
+It is written in Python 3.7 and requires Volatility 2.6.1+.
 
 The tool was inspired by several great tutorials and trainings, few of them is listed below.
 Without understanding the background, the tool is not big of a help, so I recommend doing the trianings first
