@@ -280,7 +280,28 @@ def main():
             cmd2 = "md5sum %s/*" % myexportdir
             cmd3 = "sha1sum %s/*" % myexportdir
             cmd4 = "sha256sum %s/*" % myexportdir
-            print(run_script_class(interpreter='/usr/bin/file', command=cmd1).runcmd()['output'])
+            output_dict = run_script_class(interpreter='/usr/bin/file', command=cmd1).runcmd() # ['output']
+            # output_dict = run_script_class(interpreter='/usr/bin/file',
+            #                                command='/tmp/bCIRT_memimage_analyser/exports/*').runcmd()
+
+            # Collecting process export hash data
+            output_list = output_dict['output'].split('\n')
+            for outitem in output_list:
+                if outitem.startswith('None:'):
+                    print("[i] Skipping None")
+                elif outitem:
+                    filename, filetype = outitem.split(':')
+                    filetype = filetype.strip(' ')
+                    md5hash = run_script_class(interpreter='/usr/bin/md5sum',
+                                               command=filename).runcmd()
+                    filemd5 = md5hash['output'].split(' ', maxsplit=1)[0]
+                    sha256hash = run_script_class(interpreter='/usr/bin/md5sum',
+                                               command=filename).runcmd()
+                    filesha256 = sha256hash['output'].split(' ', maxsplit=1)[0]
+                    outvalue = "%s|%s|%s|%s" % (filemd5, filesha256,filename, filetype)
+                    print(outvalue)
+                else:
+                    pass
 
 
         # print("%s" % execretval['output'])

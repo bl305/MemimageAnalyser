@@ -82,3 +82,22 @@ class run_script_class(object):
             return {"command": self.command, "status": self.status, "error": "0", "output": self.output, "pid": pid}
         else:
             return {"command": self.command, "status": self.status, "error": self.error, "output": self.output, "pid": pid}
+
+# output_dict = run_script_class(interpreter='/usr/bin/file', command='/tmp/bCIRT_memimage_analyser/exports/*').runcmd()
+# output_list = output_dict['output'].split('\n')
+# for outitem in output_list:
+#     if outitem.startswith('None:'):
+#         print("[i] Skipping None")
+#     elif outitem:
+#         filename, filetype = outitem.split(':')
+#         filetype = filetype.strip(' ')
+#         md5hash = run_script_class(interpreter='/usr/bin/md5sum',
+#                                    command=filename).runcmd()
+#         filemd5 = md5hash['output'].split(' ', maxsplit=1)[0]
+#         sha256hash = run_script_class(interpreter='/usr/bin/md5sum',
+#                                    command=filename).runcmd()
+#         filesha256 = sha256hash['output'].split(' ', maxsplit=1)[0]
+#         outvalue = "%s|%s|%s|%s" % (filemd5, filesha256,filename, filetype)
+#         print(outvalue)
+#     else:
+#         pass
